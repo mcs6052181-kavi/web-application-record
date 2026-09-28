@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #eef2ff;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function StudentForm() {
+
+    const [data, setData] = React.useState({
+        name: "",
+        email: "",
+        course: ""
+    });
+
+    const [error, setError] = React.useState("");
+    const [success, setSuccess] = React.useState("");
+
+    function handleChange(event) {
+
+        const { name, value } = event.target;
+
+        setData({
+            ...data,
+            [name]: value
+        });
+    }
+
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        if (data.name === "" ||
+            data.email === "" ||
+            data.course === "") {
+
+            setError("Please fill all fields");
+            setSuccess("");
+
+        } else {
+
+            setError("");
+            setSuccess("Student registered successfully!");
+
+            setData({
+                name: "",
+                email: "",
+                course: ""
+            });
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>Student Registration</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value={data.name}
+                    onChange={handleChange}
+                    placeholder="Enter name"
+                />
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                />
+
+                <label>Course</label>
+
+                <input
+                    type="text"
+                    name="course"
+                    value={data.course}
+                    onChange={handleChange}
+                    placeholder="Enter course"
+                />
+
+                {error && <p className="error">{error}</p>}
+
+                <button type="submit">
+                    Register
+                </button>
+
+                {success && (
+                    <p className="success">{success}</p>
+                )}
+
+            </form>
+
+        </div>
+    );
+}
+
+function App() {
+    return <StudentForm />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+

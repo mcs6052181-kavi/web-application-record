@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Salary</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f0fdf4;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #16a34a;
+        }
+
+        .value {
+            font-size: 35px;
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #16a34a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Employee(props) {
+
+    const [salary, setSalary] = React.useState(props.salary);
+
+    function increase() {
+        setSalary(salary + 1000);
+    }
+
+    function decrease() {
+        if (salary >= 1000) {
+            setSalary(salary - 1000);
+        }
+    }
+
+    function reset() {
+        setSalary(props.salary);
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Employee Information</h2>
+
+            <p>Name: {props.name}</p>
+            <p>Department: {props.department}</p>
+            <p>Position: {props.position}</p>
+
+            <hr />
+
+            <h2>Salary</h2>
+
+            <div className="value">
+                ₹{salary}
+            </div>
+
+            <button onClick={increase}>Increase ₹1000</button>
+            <button onClick={decrease}>Decrease ₹1000</button>
+            <button onClick={reset}>Reset</button>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Employee Salary System</h1>
+
+            <Employee
+                name="Rahul"
+                department="IT"
+                position="Developer"
+                salary={25000}
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+

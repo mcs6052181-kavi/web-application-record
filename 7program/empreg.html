@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Registration</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0fdf4;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #16a34a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function EmployeeForm() {
+
+    const [data, setData] = React.useState({
+        name: "",
+        email: "",
+        department: "",
+        salary: ""
+    });
+
+    const [error, setError] = React.useState("");
+    const [success, setSuccess] = React.useState("");
+
+    function handleChange(event) {
+
+        const { name, value } = event.target;
+
+        setData({
+            ...data,
+            [name]: value
+        });
+    }
+
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        if (
+            data.name === "" ||
+            data.email === "" ||
+            data.department === "" ||
+            data.salary === ""
+        ) {
+
+            setError("Please fill all fields");
+            setSuccess("");
+
+        } else {
+
+            setError("");
+            setSuccess("Employee registered successfully!");
+
+            setData({
+                name: "",
+                email: "",
+                department: "",
+                salary: ""
+            });
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>Employee Registration</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value={data.name}
+                    onChange={handleChange}
+                    placeholder="Enter employee name"
+                />
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                />
+
+                <label>Department</label>
+
+                <input
+                    type="text"
+                    name="department"
+                    value={data.department}
+                    onChange={handleChange}
+                    placeholder="Enter department"
+                />
+
+                <label>Salary</label>
+
+                <input
+                    type="number"
+                    name="salary"
+                    value={data.salary}
+                    onChange={handleChange}
+                    placeholder="Enter salary"
+                />
+
+                {error && <p className="error">{error}</p>}
+
+                <button type="submit">
+                    Register Employee
+                </button>
+
+                {success && (
+                    <p className="success">{success}</p>
+                )}
+
+            </form>
+
+        </div>
+    );
+}
+
+function App() {
+    return <EmployeeForm />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+

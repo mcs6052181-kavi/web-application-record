@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Marks</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #eef2ff;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        .value {
+            font-size: 40px;
+            color: #2563eb;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Student(props) {
+
+    const [marks, setMarks] = React.useState(0);
+
+    function addMarks() {
+        setMarks(marks + 5);
+    }
+
+    function removeMarks() {
+        if (marks >= 5) {
+            setMarks(marks - 5);
+        }
+    }
+
+    function reset() {
+        setMarks(0);
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Student Information</h2>
+
+            <p>Name: {props.name}</p>
+            <p>Course: {props.course}</p>
+            <p>Year: {props.year}</p>
+
+            <hr />
+
+            <h2>Marks</h2>
+
+            <div className="value">{marks}</div>
+
+            <button onClick={addMarks}>Add 5</button>
+            <button onClick={removeMarks}>Remove 5</button>
+            <button onClick={reset}>Reset</button>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Student Marks System</h1>
+
+            <Student
+                name="Kaviya"
+                course="BCA"
+                year="Final Year"
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+

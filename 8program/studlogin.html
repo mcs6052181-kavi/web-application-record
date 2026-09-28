@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Login</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 360px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .icon {
+            font-size: 50px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 18px;
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function InputField({ label, type, value, onChange, placeholder }) {
+    return (
+        <div>
+            <label>{label}</label>
+            <input
+                type={type}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+            />
+        </div>
+    );
+}
+
+function StudentLogin() {
+
+    const [name, setName] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (name === "" || password === "") {
+            setMessage("⚠️ Please enter all details");
+        } else {
+            setMessage("✅ Welcome, " + name + "!");
+        }
+    }
+
+    return (
+        <div className="card">
+
+            <div className="icon">🎓</div>
+
+            <h2>Student Login</h2>
+
+            <p className="subtitle">
+                Welcome back, student!
+            </p>
+
+            <form onSubmit={handleSubmit}>
+
+                <InputField
+                    label="Student Name"
+                    type="text"
+                    value={name}
+                    placeholder="Enter your name"
+                    onChange={(e) => setName(e.target.value)}
+                />
+
+                <InputField
+                    label="Password"
+                    type="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <button type="submit">
+                    Login →
+                </button>
+
+            </form>
+
+            <p className="message">{message}</p>
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root"))
+    .render(<StudentLogin />);
+
+</script>
+
+</body>
+</html>
+

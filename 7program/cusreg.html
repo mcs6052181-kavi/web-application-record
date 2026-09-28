@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Registration</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #fff7ed;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ea580c;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #ea580c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function CustomerForm() {
+
+    const [data, setData] = React.useState({
+        name: "",
+        phone: "",
+        email: "",
+        city: ""
+    });
+
+    const [error, setError] = React.useState("");
+    const [success, setSuccess] = React.useState("");
+
+    function handleChange(event) {
+
+        const { name, value } = event.target;
+
+        setData({
+            ...data,
+            [name]: value
+        });
+    }
+
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        if (
+            data.name === "" ||
+            data.phone === "" ||
+            data.email === "" ||
+            data.city === ""
+        ) {
+
+            setError("Please fill all fields");
+            setSuccess("");
+
+        } else if (data.phone.length !== 10) {
+
+            setError("Enter a valid 10-digit phone number");
+            setSuccess("");
+
+        } else {
+
+            setError("");
+            setSuccess("Customer registered successfully!");
+
+            setData({
+                name: "",
+                phone: "",
+                email: "",
+                city: ""
+            });
+        }
+    }
+
+    return (
+        <div className="container">
+
+            <h1>Customer Registration</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value={data.name}
+                    onChange={handleChange}
+                    placeholder="Enter name"
+                />
+
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    value={data.phone}
+                    onChange={handleChange}
+                    placeholder="Enter phone number"
+                />
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                    placeholder="Enter email"
+                />
+
+                <label>City</label>
+
+                <input
+                    type="text"
+                    name="city"
+                    value={data.city}
+                    onChange={handleChange}
+                    placeholder="Enter city"
+                />
+
+                {error && <p className="error">{error}</p>}
+
+                <button type="submit">
+                    Register Customer
+                </button>
+
+                {success && (
+                    <p className="success">{success}</p>
+                )}
+
+            </form>
+
+        </div>
+    );
+}
+
+function App() {
+    return <CustomerForm />;
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+

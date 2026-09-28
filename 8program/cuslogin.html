@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Login</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 360px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #dd2476;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 18px;
+            color: #dd2476;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function InputField({ label, type, value, onChange, placeholder }) {
+    return (
+        <div>
+            <label>{label}</label>
+            <input
+                type={type}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
+            />
+        </div>
+    );
+}
+
+function CustomerLogin() {
+
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (email === "" || password === "") {
+            setMessage("⚠️ Please enter all details");
+        } else {
+            setMessage("✅ Welcome! Login successful.");
+        }
+    }
+
+    return (
+        <div className="card">
+
+            <div className="icon">🛍️</div>
+
+            <h2>Customer Login</h2>
+
+            <p className="subtitle">
+                Login to continue shopping
+            </p>
+
+            <form onSubmit={handleSubmit}>
+
+                <InputField
+                    label="Email"
+                    type="email"
+                    value={email}
+                    placeholder="Enter your email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <InputField
+                    label="Password"
+                    type="password"
+                    value={password}
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <button type="submit">
+                    Sign In →
+                </button>
+
+            </form>
+
+            <p className="message">{message}</p>
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById("root"))
+    .render(<CustomerLogin />);
+
+</script>
+
+</body>
+</html>
+

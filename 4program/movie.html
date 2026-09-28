@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Movie List</title>
+</head>
+<body>
+
+<h2>My Favorite Movies</h2>
+
+<input type="text" id="movie" placeholder="Enter movie name">
+<button onclick="addMovie()">Add Movie</button>
+
+<ul id="list"></ul>
+
+<script>
+
+function addMovie() {
+
+    let input = document.getElementById("movie");
+
+    let li = document.createElement("li");
+
+    li.innerHTML = input.value;
+
+    li.onclick = function() {
+        li.remove();
+    };
+
+    document.getElementById("list").appendChild(li);
+
+    input.value = "";
+}
+
+</script>
+
+</body>
+</html>

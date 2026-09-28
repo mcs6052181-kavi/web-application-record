@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student List</title>
+</head>
+<body>
+
+<h2>Student Names</h2>
+
+<input type="text" id="student" placeholder="Enter student name">
+<button onclick="addStudent()">Add Student</button>
+
+<ul id="list"></ul>
+
+<script>
+
+function addStudent() {
+
+    let input = document.getElementById("student");
+
+    let li = document.createElement("li");
+
+    li.innerHTML = input.value;
+
+    li.onclick = function() {
+        li.remove();
+    };
+
+    document.getElementById("list").appendChild(li);
+
+    input.value = "";
+}
+
+</script>
+
+</body>
+</html>

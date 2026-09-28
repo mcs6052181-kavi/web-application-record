@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+
+<h2>Employee Registration</h2>
+
+<form onsubmit="return validate()">
+
+    Employee Name:
+    <input type="text" id="name"><br><br>
+
+    Employee ID:
+    <input type="text" id="id"><br><br>
+
+    Salary:
+    <input type="text" id="salary"><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+
+function validate() {
+
+    let name = document.getElementById("name").value;
+    let id = document.getElementById("id").value;
+    let salary = document.getElementById("salary").value;
+    let message = document.getElementById("msg");
+
+    if (name == "" || id == "" || salary == "") {
+        message.innerHTML = "All fields are required";
+        return false;
+    }
+
+    if (salary <= 0) {
+        message.innerHTML = "Enter a valid salary";
+        return false;
+    }
+
+    message.style.color = "green";
+    message.innerHTML = "Employee details submitted successfully!";
+    return false;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Appointment</title>
+</head>
+<body>
+
+<h2>Hospital Appointment Form</h2>
+
+<form onsubmit="return validate()">
+
+    Patient Name:
+    <input type="text" id="name"><br><br>
+
+    Age:
+    <input type="text" id="age"><br><br>
+
+    Email:
+    <input type="text" id="email"><br><br>
+
+    Doctor Name:
+    <input type="text" id="doctor"><br><br>
+
+    <button type="submit">Book Appointment</button>
+
+</form>
+
+<p id="msg" style="color:red;"></p>
+
+<script>
+
+function validate() {
+
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let email = document.getElementById("email").value;
+    let doctor = document.getElementById("doctor").value;
+    let message = document.getElementById("msg");
+
+    // Check empty fields
+    if (name == "" || age == "" || email == "" || doctor == "") {
+        message.innerHTML = "All fields are required";
+        return false;
+    }
+
+    // Check age
+    if (age <= 0) {
+        message.innerHTML = "Enter a valid age";
+        return false;
+    }
+
+    // Check email
+    if (!email.includes("@")) {
+        message.innerHTML = "Enter a valid email";
+        return false;
+    }
+
+    message.style.color = "green";
+    message.innerHTML = "Appointment booked successfully!";
+
+    return false;
+}
+
+</script>
+
+</body>
+</html>

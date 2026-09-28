@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Quantity</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #fff7ed;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #ea580c;
+        }
+
+        .value {
+            font-size: 40px;
+            color: #ea580c;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background: #ea580c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Product(props) {
+
+    const [quantity, setQuantity] = React.useState(1);
+
+    function add() {
+        setQuantity(quantity + 1);
+    }
+
+    function remove() {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    }
+
+    function reset() {
+        setQuantity(1);
+    }
+
+    return (
+        <div className="card">
+
+            <h2>Product Information</h2>
+
+            <p>Name: {props.name}</p>
+            <p>Category: {props.category}</p>
+            <p>Price: ₹{props.price}</p>
+
+            <hr />
+
+            <h2>Quantity</h2>
+
+            <div className="value">{quantity}</div>
+
+            <button onClick={add}>+</button>
+            <button onClick={remove}>-</button>
+            <button onClick={reset}>Reset</button>
+
+            <p>
+                Total Price: ₹{props.price * quantity}
+            </p>
+
+        </div>
+    );
+}
+
+function App() {
+
+    return (
+        <div>
+
+            <h1>Shopping Cart</h1>
+
+            <Product
+                name="Laptop"
+                category="Electronics"
+                price={50000}
+            />
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(
+    document.getElementById("root")
+);
+
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
+
